@@ -1,7 +1,10 @@
 #ifndef LINKED_LIST_H
 #define LINKED_LIST_H
 
-#include "libs.h"
+#include <iostream>
+#include <algorithm>
+#include <string>
+#include <vector>
 
 template <typename T>
 class LinkedList
@@ -14,7 +17,6 @@ public:
     virtual void push_back(const T &value) = 0;
     virtual T pop_back() = 0;
     virtual int remove(const T &value) = 0;
-    virtual void swap(LinkedList<T> &x) = 0;
     virtual void clear() = 0;
     virtual void reverse() = 0;
 };
@@ -41,11 +43,10 @@ public:
     void push_back(const T &value);
     T pop_back();
     void insert(Iterator pos, const T &value);
-    T erase(Iterator pos);
-    T erase(Iterator pos1, Iterator pos2);
+    void erase(Iterator pos);
+    void erase(Iterator pos1, Iterator pos2);
     void remove(const T &value);
     int removeAll(const T &value);
-    void swap(LinkedList<T> &x);
     void clear();
     void reverse();
 
@@ -74,13 +75,14 @@ protected:
     public:
         Iterator();
         Iterator(const Node *pNode);
+        Iterator operator=(const Node *node);
         Iterator &operator++();   // prefix
         Iterator operator++(int); // postfix
         bool operator!=(const Iterator *itr);
         T operator*();
 
     private:
-        Node *pCurr;
+        Node *pCurr_;
     }
 };
 
@@ -237,8 +239,98 @@ inline T SinglyLinkedList<T>::pop_back()
 template <typename T>
 inline void SinglyLinkedList<T>::insert(Iterator pos, const T &value)
 {
-    pos->pCurr->pNext_ = new Node(value, pos->pCurr->pNext_);
+    pos->pCurr_->pNext_ = new Node(value, pos->pCurr_->pNext_);
     listSize_ += 1;
+}
+
+template <typename T>
+inline void SinglyLinkedList<T>::erase(Iterator pos)
+{
+    if (pos->pCurr_ == pHead_)
+    {
+        pop_front();
+        return;
+    }
+    Node *temp = pHead_;
+    while (temp->pNext_ = pos->pCurr_)
+    {
+        temp = temp->pNext_;
+    }
+    Node *del = pos->pCurr_;
+    temp->pNext_ = del->pNext_;
+    delete del;
+    listSize_ -= 1;
+}
+
+template <typename T>
+inline void SinglyLinkedList<T>::erase(Iterator pos1, Iterator pos2)
+{
+    while (pos1 != pos2)
+    {
+        erase(pos1);
+        pos1++;
+    }
+}
+
+template <typename T>
+inline void SinglyLinkedList<T>::remove(const T &value)
+{
+    if (empty())
+    {
+        return;
+    }
+    for (Iterator itr = begin(); itr != end(); itr++)
+    {
+        if (*itr == value)
+        {
+            erase(itr);
+            return;
+        }
+    }
+}
+
+template <typename T>
+inline int SinglyLinkedList<T>::removeAll(const T &value)
+{
+    if (empty())
+    {
+        return 0;
+    }
+    int numDel = 0;
+    for (Iterator itr = begin(); itr != end(); itr++)
+    {
+        if (*itr == value)
+        {
+            erase(itr);
+            numDel += 1;
+        }
+    }
+
+    return numDel;
+}
+
+template <class T>
+void SinglyLinkedList<T>::clear()
+{
+    while (!empty())
+    {
+        pop_front();
+    }
+}
+
+template <class T>
+void SinglyLinkedList<T>::reverse()
+{
+    Node *currNode = pHead_;
+    Node *prevNode = nullptr;
+    while (currNode != nullptr)
+    {
+        Node *nextNode = currNode->pNext_;
+        currNode->pNext_ = prevNode;
+        prevNode = currNode;
+        currNode = nextNode;
+    }
+    pHead_ = prevNode;
 }
 
 template <typename T>
@@ -251,5 +343,49 @@ inline SinglyLinkedList<T>::Node::Node(const T &value, Node *pNext)
 template <typename T>
 inline SinglyLinkedList<T>::Iterator::Iterator()
 {
+    pCurr_ = pHead_;
+}
+
+template <typename T>
+inline SinglyLinkedList<T>::Iterator::Iterator(const Node *pNode)
+{
+    pCurr_ = pNode;
+}
+
+template <class T>
+inline SinglyLinkedList<T>::Iterator SinglyLinkedList<T>::Iterator::operator=(const SinglyLinkedList<T>::Node *node)
+{
+    this->pCurr_ = node;
+    return *this;
+}
+
+template <class T>
+inline SinglyLinkedList<T>::Iterator &SinglyLinkedList<T>::Iterator::operator++()
+{
+    if (this->pCurr_ != nullptr)
+    {
+        this->pCurr_ = this->pCurr_->pNext_;
+    }
+    return *this;
+}
+
+template <class T>
+inline SinglyLinkedList<T>::Iterator SinglyLinkedList<T>::Iterator::operator++(int)
+{
+    Iterator itr = *this;
+    ++*this;
+    return itr;
+}
+
+template <class T>
+inline bool SinglyLinkedList<T>::Iterator::operator!=(const SinglyLinkedList<T>::Iterator *itr)
+{
+    return this->pCurr_ != itr->pCurr_;
+}
+
+template <class T>
+inline T SinglyLinkedList<T>::Iterator::operator*()
+{
+    return this->pCurr_->value_;
 }
 #endif

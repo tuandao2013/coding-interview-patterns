@@ -10,6 +10,8 @@ static std::string isLargestContainerTestcases = "./test/testcases/two-pointers/
 static std::string pairSumUnsortedTwoPassTestcases = "./test/testcases/hashmaps/pair-sum-unsorted-testcases.txt";
 static std::string verifySudokuBoardTestcase = "./test/testcases/hashsets/verify-sudoku-board-testcases.txt";
 static std::string zeroStripingTestcase = "./test/testcases/hashsets/zero-striping-testcases.txt";
+static std::string linkedListReversalTestcase = "./test/testcases/linked-list/reverse-linked-list.txt";
+static std::string linkedListRemoveKthLastNodeTestcase = "./test/testcases/linked-list/remove-kth-last-node.txt";
 
 int main()
 {
@@ -23,8 +25,11 @@ int main()
     // test.testPairSumUnsortedTwoPass(pairSumUnsortedTwoPassTestcases);
     // test.testPairSumUnsorted(pairSumUnsortedTwoPassTestcases);
     // test.testVerifySudokuBoard(verifySudokuBoardTestcase);
-    test.testZeroStripingHashsets(zeroStripingTestcase);
-    test.testZeroStripingInPlace(zeroStripingTestcase);
+    // test.testZeroStripingHashsets(zeroStripingTestcase);
+    // test.testZeroStripingInPlace(zeroStripingTestcase);
+    // test.testLinkedListReversal(linkedListReversalTestcase);
+    // test.testLinkedListReversalRecursive(linkedListReversalTestcase);
+    test.testLinkedListRemoveKthLastNode(linkedListRemoveKthLastNodeTestcase, 2);
 
     return 0;
 }

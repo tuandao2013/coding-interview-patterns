@@ -209,10 +209,44 @@ public:
         std::cout << "\n____________________________\n";
     }
 
+    void testLinkedListReversal(std::string testcaseFile)
+    {
+        std::cout << "\nTest Linked List Reversal:\n";
+        ListNode *head = linkedList.createSinglyLinkedList(testcaseFile);
+        std::cout << "Test case: ";
+        linkedList.printSinglyLinkedList(head);
+        std::cout << "Result: ";
+        linkedList.printSinglyLinkedList(linkedList.linkedListReversal(head));
+        std::cout << "____________________________\n";
+    }
+
+    void testLinkedListReversalRecursive(std::string testcaseFile)
+    {
+        std::cout << "\nTest Linked List Reversal Recursive:\n";
+        ListNode *head = linkedList.createSinglyLinkedList(testcaseFile);
+        std::cout << "Test case: ";
+        linkedList.printSinglyLinkedList(head);
+        std::cout << "Result: ";
+        linkedList.printSinglyLinkedList(linkedList.linkedListReversalRecursive(head));
+        std::cout << "____________________________\n";
+    }
+
+    void testLinkedListRemoveKthLastNode(std::string testcaseFile, int k)
+    {
+        std::cout << "\nTest Linked List Remove Kth Last Node:\n";
+        ListNode *head = linkedList.createSinglyLinkedList(testcaseFile);
+        std::cout << "Test case: ";
+        linkedList.printSinglyLinkedList(head);
+        std::cout << "Result: ";
+        linkedList.printSinglyLinkedList(linkedList.removeKthLastNode(head, k));
+        std::cout << "____________________________\n";
+    }
+
 private:
     TwoPointers twoPointers;
     Hashmaps hashmaps;
     Hashsets hashsets;
+    LinkedListProblems linkedList;
 };
 
 #endif
