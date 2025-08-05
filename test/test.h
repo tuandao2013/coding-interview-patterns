@@ -242,11 +242,77 @@ public:
         std::cout << "____________________________\n";
     }
 
+    void testLinkedListIntersection()
+    {
+        std::cout << "\nTest Linked List Intersection:\n";
+        ListNode *intersecNode = new ListNode(8, new ListNode(7, new ListNode(2)));
+        ListNode *headA = new ListNode(1, new ListNode(3, new ListNode(4, intersecNode)));
+        ListNode *headB = new ListNode(6, new ListNode(4, intersecNode));
+        std::cout << "Test case: ";
+        std::cout << "A: ";
+        linkedList.printSinglyLinkedList(headA);
+        std::cout << "B: ";
+        linkedList.printSinglyLinkedList(headB);
+
+        std::cout << "Result: ";
+        ListNode *result = linkedList.linkedListIntersection(headA, headB);
+        std::cout << "ListNode(" << result->getValue() << ")\n";
+        std::cout << "____________________________\n";
+    }
+
+    void testLinkedListLoopNaive()
+    {
+        std::cout << "\nTest Linked List Loop Naive:\n";
+        ListNode *loop = new ListNode(2);
+        loop->setNext(new ListNode(3, new ListNode(4, new ListNode(5, loop))));
+        ListNode *head = new ListNode(0, new ListNode(1, loop));
+        std::cout << "Test case: ";
+        std::cout << "0 -> 1 -> (2 -> 3 -> 4 -> 5)\n";
+        std::string result = fastSlowPointers.linkedListLoopNaive(head) ? "True" : "False";
+        std::cout << "Result: " << result << "\n";
+        std::cout << "____________________________\n";
+    }
+
+    void testLinkedListLoop()
+    {
+        std::cout << "\nTest Linked List Loop:\n";
+        ListNode *loop = new ListNode(2);
+        loop->setNext(new ListNode(3, new ListNode(4, new ListNode(5, loop))));
+        ListNode *head = new ListNode(0, new ListNode(1, loop));
+        std::cout << "Test case: ";
+        std::cout << "0 -> 1 -> (2 -> 3 -> 4 -> 5)\n";
+        std::string result = fastSlowPointers.linkedListLoop(head) ? "True" : "False";
+        std::cout << "Result: " << result << "\n";
+        std::cout << "____________________________\n";
+    }
+
+    void testLinkedListMidpoint(std::string testcaseFile)
+    {
+        std::cout << "\nTest Linked List Mid Point:\n";
+        ListNode *head = linkedList.createSinglyLinkedList(testcaseFile);
+        std::cout << "Test case: ";
+        linkedList.printSinglyLinkedList(head);
+        std::cout << "Result: ";
+        ListNode *result = fastSlowPointers.linkedListMidPoint(head);
+        std::cout << "ListNode(" << result->getValue() << ")" << "\n";
+        std::cout << "____________________________\n";
+    }
+
+    void testHappyNumber(int n)
+    {
+        std::cout << "\nTest Happy Number:\n";
+        std::cout << "Test case: n = " << n << "\n";
+        std::string result = fastSlowPointers.happyNumber(n) ? "True" : "False";
+        std::cout << "Result: " << result << "\n";
+        std::cout << "____________________________\n";
+    }
+
 private:
     TwoPointers twoPointers;
     Hashmaps hashmaps;
     Hashsets hashsets;
     LinkedListProblems linkedList;
+    FastSlowPointers fastSlowPointers;
 };
 
 #endif

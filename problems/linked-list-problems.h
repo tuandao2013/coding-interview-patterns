@@ -11,21 +11,10 @@ public:
     ListNode *linkedListReversal(ListNode *head);
     ListNode *linkedListReversalRecursive(ListNode *head);
     ListNode *removeKthLastNode(ListNode *head, int k);
+    ListNode *linkedListIntersection(ListNode *headA, ListNode *headB);
 
     ListNode *createSinglyLinkedList(const std::string &filename);
     void printSinglyLinkedList(ListNode *head);
-};
-
-struct ListNode
-{
-    friend class LinkedListProblems;
-
-public:
-    ListNode(int value, ListNode *nextNode = nullptr) : value_(value), next_(nextNode) {}
-
-private:
-    int value_;
-    ListNode *next_;
 };
 
 inline ListNode *LinkedListProblems::linkedListReversal(ListNode *head)
@@ -75,6 +64,20 @@ inline ListNode *LinkedListProblems::removeKthLastNode(ListNode *head, int k)
     }
     trailer->next_ = trailer->next_->next_;
     return dummy->next_;
+}
+
+inline ListNode *LinkedListProblems::linkedListIntersection(ListNode *headA, ListNode *headB)
+{
+    ListNode *ptrA = headA;
+    ListNode *ptrB = headB;
+
+    while (ptrA != ptrB)
+    {
+        ptrA = ptrA != nullptr ? ptrA->next_ : headB;
+        ptrB = ptrB != nullptr ? ptrB->next_ : headA;
+    }
+
+    return ptrA;
 }
 
 inline ListNode *LinkedListProblems::createSinglyLinkedList(const std::string &filename)

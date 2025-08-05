@@ -12,6 +12,7 @@ static std::string verifySudokuBoardTestcase = "./test/testcases/hashsets/verify
 static std::string zeroStripingTestcase = "./test/testcases/hashsets/zero-striping-testcases.txt";
 static std::string linkedListReversalTestcase = "./test/testcases/linked-list/reverse-linked-list.txt";
 static std::string linkedListRemoveKthLastNodeTestcase = "./test/testcases/linked-list/remove-kth-last-node.txt";
+static std::string linkedListMidpointTestcase = "./test/testcases/fast-slow-pointers/linked-list-midpoint-testcase-2.txt";
 
 int main()
 {
@@ -29,7 +30,12 @@ int main()
     // test.testZeroStripingInPlace(zeroStripingTestcase);
     // test.testLinkedListReversal(linkedListReversalTestcase);
     // test.testLinkedListReversalRecursive(linkedListReversalTestcase);
-    test.testLinkedListRemoveKthLastNode(linkedListRemoveKthLastNodeTestcase, 2);
+    // test.testLinkedListRemoveKthLastNode(linkedListRemoveKthLastNodeTestcase, 2);
+    // test.testLinkedListIntersection();
+    // test.testLinkedListLoopNaive();
+    // test.testLinkedListLoop();
+    // test.testLinkedListMidpoint(linkedListMidpointTestcase);
+    test.testHappyNumber(123);
 
     return 0;
 }
