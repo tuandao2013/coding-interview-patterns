@@ -1,3 +1,6 @@
+.vs/
+.vscode/
+
 ### C++ ###
 # Prerequisites
 *.d
@@ -32,5 +35,4 @@
 *.out
 *.app
 
-.vs/
-.vscode/
+
